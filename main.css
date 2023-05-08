@@ -5,8 +5,23 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+html{
+    background-color: #343434;
+    color: white;
+}
+
 .ascii-art {
     color: #4AF626;
     font-family: monospace;
     white-space: pre;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 1vdh;
+    color: #4AF626;
+    padding:10px;
 }
