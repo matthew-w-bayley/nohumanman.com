@@ -1,0 +1,12 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.ascii-art {
+    color: #4AF626;
+    font-family: monospace;
+    white-space: pre;
+}
