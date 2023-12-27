@@ -8,5 +8,5 @@ function httpGet(theUrl)
     return xmlHttp.responseText;
 }
 
-document.getElementById("signature").innerText = httpGet("signature.txt");
+document.getElementById("last-seen").innerText = "committed to 'Descenders Modkit' on 23rd January";
 

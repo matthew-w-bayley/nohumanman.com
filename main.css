@@ -5,8 +5,11 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-.ascii-art {
-    color: #4AF626;
-    font-family: monospace;
-    white-space: pre;
+html, body{
+    background-color: black;
+    color: white;
+}
+
+.status{
+    color: #00ff00;
 }
