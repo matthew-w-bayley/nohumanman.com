@@ -6,7 +6,6 @@ function httpGet(theUrl)
     return xmlHttp.responseText;
 }
 
-
 class Terminal {
     constructor() {
       this.command = '';

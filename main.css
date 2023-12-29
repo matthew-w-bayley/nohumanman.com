@@ -5,7 +5,8 @@
     font-family: 'JetBrains Mono', monospace;
 }
 
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap');
 
 
 .terminal{
@@ -49,14 +50,12 @@ p{
 
 p:empty:before {
     content: ' ';
-    white-space: pre;
-  }
 
-html, body{
-    background-color: black;
+html{
+    background-color: #343434;
     color: white;
 }
 
-.status{
-    color: #00ff00;
-}
+.ascii-art {
+    color: #4AF626;
+    font-family: monospace;
