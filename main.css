@@ -50,12 +50,14 @@ p{
 
 p:empty:before {
     content: ' ';
+}
 
 html{
-    background-color: #343434;
+    background-color: black;
     color: white;
 }
 
 .ascii-art {
     color: #4AF626;
     font-family: monospace;
+}
