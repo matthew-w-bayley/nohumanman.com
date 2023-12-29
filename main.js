@@ -32,9 +32,18 @@ class Terminal {
         const repositories = await this.getRepositories(username);
         let totalCommits = 0;
         for (const repository of repositories) {
-            const commits = await fetch(`https://api.github.com/repos/${username}/${repository.name}/commits`);
-            commits.json().then(data => totalCommits += data.length);
-            console.log(totalCommits);
+            let page = 1;
+            let commits = [];
+            while (true) {
+                const response = await fetch(`https://api.github.com/repos/${username}/${repository.name}/commits?page=${page}`);
+                const data = await response.json();
+                if (data.length === 0) {
+                    break;
+                }
+                commits = commits.concat(data);
+                page++;
+            }
+            totalCommits += commits.length;
         }
         return totalCommits;
     }
