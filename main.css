@@ -2,8 +2,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 *{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
 }
+
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap');
+
+
+.terminal{
+    color: #20C20E;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.active {
+    position: relative;
+}
+
+.active::after {
+    content: '|';
+    display: inline-block;
+    font-weight: 900;
+    width: 0.3em; /* Adjust the width of the cursor */
+    margin-left: -0.1em; /* Half of the width for centering */
+    animation: blink 1s step-end infinite; /* Blink animation */
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+p{
+    text-align: left;
+    padding:0;
+    margin: 0;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+p:empty:before {
+    content: ' ';
+    white-space: pre;
+  }
 
 html, body{
     background-color: black;
