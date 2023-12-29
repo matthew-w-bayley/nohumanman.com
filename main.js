@@ -1,3 +1,12 @@
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", theUrl, false); // false for synchronous request
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
+}
+
+
 class Terminal {
     constructor() {
       this.command = '';
@@ -5,34 +14,73 @@ class Terminal {
       this.directory = '/home/guest/';
       this.timeLoaded = Date.now();
       this.initTerminal();
+      
     }
   
     initTerminal() {
-      this.displayWelcomeMessage();
-      this.addNewLine();
-      this.updateActiveLine();
-  
-      document.onkeydown = (e) => {
-        this.handleKeyPress(e);
-      };
+        this.displayWelcomeMessage().then(() => {
+            this.addNewLine();
+            this.updateActiveLine();
+        });
+
+        document.onkeydown = (e) => {
+            this.handleKeyPress(e);
+        };
     }
-  
-    displayWelcomeMessage() {
-      this.messageToLine('Welcome to nohumanman.com! This is a terminal emulator built by me, Matthew. I\'ll probably update it from time to time.');
-      this.messageToLine("");
-      this.messageToLine("* GitHub   : nohumanman");
-      this.messageToLine("* LinkedIn : Matthew");
-      this.messageToLine("")
-      this.messageToLine("Information as of $(date)")
-      this.messageToLine("")
-      this.messageToLine("* Last Commit         : 2 days ago on Descenders Modkit");
-      this.messageToLine("* Public GitHub Repos : 3");
-      this.messageToLine("* Total Commits       : 1,000");
-      this.messageToLine("")
-      this.messageToLine("To get started, type 'help' to see a list of commands.");
-      this.messageToLine("");
-      this.messageToLine("");
-      this.messageToLine("Last login: Tue Nov 30 23:23:04 2021 from REDACTED");
+
+    // gracefully made using ChatGPT
+    async getTotalCommits(username){
+        const repositories = await this.getRepositories(username);
+        let totalCommits = 0;
+        for (const repository of repositories) {
+            const commits = await fetch(`https://api.github.com/repos/${username}/${repository.name}/commits`);
+            commits.json().then(data => totalCommits += data.length);
+            console.log(totalCommits);
+        }
+        return totalCommits;
+    }
+
+    async getLastCommit(username){
+        const response = await fetch(`https://api.github.com/users/${username}/repos`);
+        if (response.ok == false) 
+            throw new Error("HTTP error " + response.status);
+        const repositories = await response.json();
+        return repositories;
+    }
+
+    async getRepositories(username){
+        const response = await fetch(`https://api.github.com/users/${username}/repos`);
+        if (response.ok == false) 
+            throw new Error("HTTP error " + response.status);
+        const repositories = await response.json();
+        return repositories;
+    }
+
+    async displayWelcomeMessage() {
+        let totalCommits = -1;
+        let repoAmount = -1;
+        let lastCommit = null;
+        try{ totalCommits = await this.getTotalCommits("nohumanman") }
+        catch(err){ console.log("API Rate limit probably reached"); }
+        try{ repoAmount = (await this.getRepositories("nohumanman")).length; }
+        catch(err){ console.log("API Rate limit probably reached"); }
+        try{ lastCommit = getLastCommit(); }
+        catch(err){ console.log("API Rate limit probably reached"); }
+        this.messageToLine('Welcome to nohumanman.com! This is a terminal emulator built by me, Matthew. I\'ll probably update it from time to time.');
+        this.messageToLine("");
+        this.messageToLine("* GitHub   : nohumanman");
+        this.messageToLine("* LinkedIn : Matthew");
+        this.messageToLine("")
+        this.messageToLine("Information as of " + new Date().toDateString() + " " + new Date().toLocaleTimeString());
+        this.messageToLine("")
+        this.messageToLine("* Last Commit         : ")// + httpGet("https://api.github.com/repos/nohumanman/nohumanman.com/commits"));
+        this.messageToLine("* Public GitHub Repos : " + repoAmount);
+        this.messageToLine("* Total Commits       : " + totalCommits);
+        this.messageToLine("")
+        this.messageToLine("To get started, type 'help' to see a list of commands.");
+        this.messageToLine("");
+        this.messageToLine("");
+        this.messageToLine("Last login: Tue Nov 30 23:23:04 2021 from REDACTED");
     }
   
     addNewLine() {
@@ -90,9 +138,19 @@ class Terminal {
             this.messageToLine("")
             this.messageToLine("There really is a Linux, and these people are using it, but it is just a part of the system they use. Linux is the kernel: the program in the system that allocates the machine's resources to the other programs that you run. The kernel is an essential part of an operating system, but useless by itself; it can only function in the context of a complete operating system. Linux is normally used in combination with the GNU operating system: the whole system is basically GNU with Linux added, or GNU/Linux. All the so-called Linux distributions are really distributions of GNU/Linux!")
         }
+        else if (this.command.split("\n")[0] == "ping"){
+            this.messageToLine("Pong!");
+        }
+        else if (this.command.indexOf("rm -rf /") != -1){
+            this.messageToLine("Nice try.");
+        }
+        else if (this.command.startsWith("su")){
+            var user = this.command.split(" ")[1];
+            this.conn = user + "@nohumanman.com"
+        }
         else if (this.command.startsWith("neofetch")){
             //this.messageToLine("OS: " + this.getOS());
-            this.messageToLine("Uptime: " + (Date.now() - timeLoaded)/1000 + "s");
+            this.messageToLine("Uptime: " + (Date.now() - this.timeLoaded)/1000 + "s");
             this.messageToLine("Resolution: " + window.innerWidth + "x" + window.innerHeight);
             this.messageToLine("Theme: Hacker");
             this.messageToLine("User Agent: " + window.navigator.userAgent);
@@ -113,7 +171,7 @@ class Terminal {
             this.messageToLine("help - display this message");
         }
         else if (this.command == ""){
-            
+
         }
         else{
             this.messageToLine(this.command.split(" ")[0] + ": command not found")
@@ -124,4 +182,4 @@ class Terminal {
   }
 
 // Initialize the terminal
-const terminal = new Terminal();
+var terminal = new Terminal();
