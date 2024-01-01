@@ -65,6 +65,14 @@ class Terminal {
     }
 
     async displayWelcomeMessage() {
+
+        this.messageToLine('Welcome to nohumanman.com! This is a terminal emulator built by me, Matthew. I\'ll probably update it from time to time.');
+        this.messageToLine("");
+        this.messageToLine("* GitHub   : nohumanman");
+        this.messageToLine("* LinkedIn : Matthew");
+        this.messageToLine("")
+        this.messageToLine("Information as of " + new Date().toDateString() + " " + new Date().toLocaleTimeString());
+        this.messageToLine("")
         let totalCommits = -1;
         let repoAmount = -1;
         let lastCommit = null;
@@ -74,13 +82,6 @@ class Terminal {
         catch(err){ console.log("API Rate limit probably reached"); }
         try{ lastCommit = getLastCommit(); }
         catch(err){ console.log("API Rate limit probably reached"); }
-        this.messageToLine('Welcome to nohumanman.com! This is a terminal emulator built by me, Matthew. I\'ll probably update it from time to time.');
-        this.messageToLine("");
-        this.messageToLine("* GitHub   : nohumanman");
-        this.messageToLine("* LinkedIn : Matthew");
-        this.messageToLine("")
-        this.messageToLine("Information as of " + new Date().toDateString() + " " + new Date().toLocaleTimeString());
-        this.messageToLine("")
         this.messageToLine("* Last Commit         : ")// + httpGet("https://api.github.com/repos/nohumanman/nohumanman.com/commits"));
         this.messageToLine("* Public GitHub Repos : " + repoAmount);
         this.messageToLine("* Total Commits       : " + totalCommits);
