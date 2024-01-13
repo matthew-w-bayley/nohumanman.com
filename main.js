@@ -71,7 +71,7 @@ class Terminal {
         this.messageToLine("* GitHub   : nohumanman");
         this.messageToLine("* LinkedIn : Matthew");
         this.messageToLine("")
-        this.messageToLine("Information as of " + new Date().toDateString() + " " + new Date().toLocaleTimeString());
+        /*this.messageToLine("Information as of " + new Date().toDateString() + " " + new Date().toLocaleTimeString());
         this.messageToLine("")
         let totalCommits = -1;
         let repoAmount = -1;
@@ -84,13 +84,15 @@ class Terminal {
         catch(err){ console.log("API Rate limit probably reached"); }
         this.messageToLine("* Last Commit         : ")// + httpGet("https://api.github.com/repos/nohumanman/nohumanman.com/commits"));
         this.messageToLine("* Public GitHub Repos : " + repoAmount);
-        this.messageToLine("* Total Commits       : " + totalCommits);
+        this.messageToLine("* Total Commits       : " + totalCommits);*/
         this.messageToLine("")
         this.messageToLine("To get started, type 'help' to see a list of commands.");
         this.messageToLine("");
         this.messageToLine("");
         this.messageToLine("Last login: Tue Nov 30 23:23:04 2021 from REDACTED");
     }
+
+    
   
     addNewLine() {
       const newLine = document.createElement('p');
