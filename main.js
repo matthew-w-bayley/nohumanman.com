@@ -89,10 +89,12 @@ class Terminal {
         this.messageToLine("To get started, type 'help' to see a list of commands.");
         this.messageToLine("");
         this.messageToLine("");
-        this.messageToLine("Last login: Tue Nov 30 23:23:04 2021 from REDACTED");
+        this.messageToLine("Last login: " + new Date().toDateString()  + " from " + this.getPublicIP());
     }
 
-    
+    getPublicIP(){
+        return httpGet("https://api.ipify.org");
+    }
   
     addNewLine() {
       const newLine = document.createElement('p');
@@ -138,6 +140,9 @@ class Terminal {
         }
         else if (this.command.startsWith("ls")){
 
+        }
+        else if (this.command.startsWith("ip")){
+            this.messageToLine(this.getPublicIP());
         }
         else if (this.command.startsWith("exit")){
             window.close();
