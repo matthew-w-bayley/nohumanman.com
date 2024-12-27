@@ -130,10 +130,28 @@ This document is a pretty good rundown of the major options in the game. <span c
         margin-left: 20%;
         margin-right: 20%;
     }
+    /* get rid of margins on teensy screens*/
+	@media (max-width: 650px) {
+		body {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
     .nerdy{
         filter: blur(4px);
     }
     .nerdy:hover{
         filter: none;
+    }
+    @media print {
+        /* Get rid of blurred text when printing */
+        .nerdy{
+            filter: none
+        }
+        /* Get rid of margins */
+		body {
+			margin-left: 0;
+			margin-right: 0;
+		}
     }
 </style>
