@@ -365,8 +365,23 @@ code {
           : 'default'
     });
   </script>
-<h1 id="websites-for-beginners">Websites for beginners</h1>
-<p>In 2025, there are many options for building websites - they differ on price, user-friendliness, and flexibility. In this document I will try to outline every viable option for hosting and building a website.</p>
+<blockquote>
+<p>blurred text is nerdy stuff, you can hover over it to <span class='nerdy'>be able to see it</span></p>
+</blockquote>
+<h1 id="on-website-hosting">on website hosting</h1>
+<p>In 2025, there are many options for building websites - they differ on price, user-friendliness, and flexibility. In this document I will try to outline every viable option for hosting and building a website. All prices in this document are probably wrong.</p>
+<h2 id="decisions-decisions">Decisions, decisions</h2>
+<p>I am going to delve a little bit into the details of every option, but if you're just here to be told what to do, please consult this flowchart:</p>
+<figure>
+  <img src='flowchart.svg'>
+  <figcaption>Fig.1 - Flowchart for choosing a website builder/host</figcaption>
+</figure>
+<p>A few notes:</p>
+<ul>
+<li>dynamic means that the content is different for each person depending on certain facts (e.g. logging in, changing settings, etc.)</li>
+<li>static means the content is the same across all users (still including different pages though)</li>
+<li>The static site generator are things like jekyll or netlify (<span class='nerdy'>Jekyll could be hosted on github pages which would be free</span>)</li>
+</ul>
 <h3 id="how-they-get-you">How they get you ($$$)</h3>
 <p>When researching most of these options, the payments can be quite confusing.</p>
 <blockquote>
@@ -374,7 +389,7 @@ code {
 </blockquote>
 <p>It is important to consider there are nuances in prices that may be situation-specific (e.g. getting a cheap domain for one year instead of a good price for many). Any prices listed here are of the 'settled-in' price (i.e. after the cheap period).</p>
 <h3 id="understanding-the-ecosystem">Understanding the ecosystem</h3>
-<p>When creating a website, there are 4 parts to consider: DNS Registrar, Website Builder, Website Host, and Mail Host. It is possible for one application (e.g. wix) to do all of these together, but they can be more expensive (because people pay for convenience).</p>
+<p>When creating a website, there are 4 parts to consider<span class='nerdy'>: DNS Registrar, Website Builder, Website Host, and Mail Host.</span> It is possible for one application (e.g. wix) to do all of these together, but they can be more expensive (because people pay for convenience).</p>
 <!-- 
 architecture-beta
     group api(cloud)[API]
@@ -388,9 +403,12 @@ architecture-beta
     dns:T -- B:website_host
     website_builder:L --\> R:website_host
 -->
-<p>The basic ecosystem works such that the DNS links to the mail host and website host, and the website builder is used for the user to create the website that is then hosted on the website hosting service:</p>
-<p><img src="Untitled diagram-2024-12-27-034746.png" alt="alt text"></p>
-<p>It is not <em>that</em> much hassle to setup these services independently, and once they are configured there is little to no maintenance required. It is my opinion that the cost benefit greatly exceeds the effort to understand the technologies, but that may be my bias.</p>
+<p><span class='nerdy'>The basic ecosystem works such that the DNS links to the mail host and website host, and the website builder is used for the user to create the website that is then hosted on the website hosting service:</p>
+<figure>
+  <img src='website-ecosystem.png'>
+  <figcaption>Fig.2 - Diagram of the general website ecossystem (most website providers can do all of these)</figcaption>
+</figure>
+<p>It is not <em>that</em> much hassle to setup these services independently, and once they are configured there is little to no maintenance required. It is my opinion that the cost benefit greatly exceeds the effort to understand the technologies, but that may be my bias.</span></p>
 <h2 id="domain-name-dns-registrars">Domain Name (DNS) Registrars</h2>
 <p>The 'domain name' is the main part of the address used to access your website, for example, google's domain name is '<strong>google.com</strong>'. Domain names vary in price (cars.com sold for $872 million 🤯)</p>
 <ul>
@@ -426,25 +444,58 @@ architecture-beta
 </ul>
 </li>
 </ul>
-<p>All of these DNS registrars allow you to fully manage the DNS records, hence you can route the domain name to any website host you pick.</p>
+<p><span class='nerdy'>All of these DNS registrars allow you to fully manage the DNS records, hence you can route the domain name to any website host you pick.</span> It basically doesn't matter which one of these you pick, it's up to you!</p>
 <h2 id="website-building--hosting">Website building / hosting</h2>
 <ul>
-<li>Squarespace</li>
-<li>Google Sites</li>
+<li>Squarespace
+<ul>
+<li>£12/month</li>
+<li>The builder requires a little knowledge</li>
+<li>Hosts the website</li>
+<li>routing from DNS is easy if using squarespace dns</li>
+</ul>
+</li>
+<li>Google Sites
+<ul>
+<li>£0/month (completely free!)</li>
+<li>The builder requires basically no learning</li>
+<li>Hosts the website</li>
+<li>routing from DNS is a little tricky</li>
+</ul>
+</li>
 <li>Wordpress
 <ul>
+<li>£ depends on host</li>
+<li>Requires a little more learning</li>
+<li>Incredibly flexible</li>
 <li>Can be hosted using:
 <ul>
-<li>Bluehost</li>
-<li>Wordpress</li>
-<li>WP Engine</li>
+<li>Bluehost (£8.99/month)</li>
+<li>Wordpress (£20/month)</li>
+<li>WP Engine (£40/month)</li>
+<li>fasthosts (£6/month)</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>Wix Sites</li>
-<li>GitHub</li>
+<li>Wix Sites
+<ul>
+<li>£9/month</li>
+<li>The builder requires a little knowledge</li>
+<li>Hosts the website</li>
+<li>routing from DNS is easy if using squarespace dns</li>
 </ul>
+</li>
+<li>GitHub Pages
+<ul>
+<li>£0/month</li>
+<li>This is a funny one, it's a very good tool to generate a site for a project/wiki from scratch or templates</li>
+<li>more developer-oriented (may be complex)</li>
+</ul>
+</li>
+</ul>
+<p>Google sites is a really great option to use if flexibility and complexity are irrlelevent - there are many limitations, but for clean-looking static websites, the limitations are probably worse the nonexistent cost.</p>
+<p>I would say the cheapest for the 'power' is wordpress, with fasthosts as the server host.</p>
 <h2 id="custom-emails">Custom emails</h2>
 <p>If you want to have an email @yourdomain (e.g. matthew@nohumanman.com), then you will need some kind of email host to support this.</p>
 <ul>
@@ -475,6 +526,20 @@ architecture-beta
 </li>
 </ul>
 <p>Some of these may be more appealing if web-based email is important for your uses, but if you're just going to use an email client, the main difference will be mailbox size.</p>
+<h2 id="summary-i-guess">Summary, I guess</h2>
+<p>This document is a pretty good rundown of the major options in the game. <span class='nerdy'>It's benefical for me as well as I am currently writing in a markdown document that I am exporting to html and then putting on github pages. Definitely not the smartest option and not something I would recommend - if I were to consult the flowchart here, I would end up with a static site generator, like Jekyll, which I'd be interested in using - if it lets me use html I could do cool things like have the option to blur out rambly nerdy stuff like this paragraph unless asked 🤓 </span></p>
+<style>
+    body{
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+    .nerdy{
+        filter: blur(4px);
+    }
+    .nerdy:hover{
+        filter: none;
+    }
+</style>
 
 </body>
 </html>
